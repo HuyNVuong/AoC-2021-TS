@@ -1,4 +1,4 @@
-import {INPUT} from './day01.input';
+import { INPUT } from './day01.input';
 
 const depths = INPUT.split('\n').map(Number);
 
