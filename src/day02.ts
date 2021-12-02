@@ -5,11 +5,6 @@ interface Command {
   steps: number,
 }
 
-interface Aim {
-  x: number,
-  y: number,
-}
-
 const commands: Command[] = INPUT.split('\n').map((raw) => {
   const splits = raw.split(' ');
   return {command: splits[0], steps: Number(splits[1])};
