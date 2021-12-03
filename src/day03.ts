@@ -1,9 +1,9 @@
 import { INPUT } from "./day03.input";
 
 const binaries = INPUT.split('\n');
+const n = binaries[0].length;
 
 const part01 = (binaries: string[]): number => {
-  const n = binaries[0].length;
   let gamma = '';
   let epsilon = '';
   for (let i = 0; i < n; i++) {
@@ -27,7 +27,6 @@ interface Count {
 
 const countOneAndZero = (binaries: string[]): Count[] => {
   const counts: Count[] = [];
-  const n = binaries[0].length;
   for (let i = 0; i < n; i++) {
     let zeroes = 0;
     let ones = 0;
@@ -42,7 +41,6 @@ const countOneAndZero = (binaries: string[]): Count[] => {
 }
 
 const part02 = (binaries: string[]): number => {
-  const n = binaries[0].length;
   let counts: Count[] = [];
 
   let oxys = [...binaries];
@@ -63,7 +61,6 @@ const part02 = (binaries: string[]): number => {
     const leastCommon = zeroes <= ones ? '0' : '1';
     co2s = co2s.filter((co2) => co2[i] === leastCommon);
     counts = countOneAndZero(co2s);
-
   }
 
   return parseInt(oxys[0], 2) * parseInt(co2s[0], 2);
