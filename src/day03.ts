@@ -41,7 +41,7 @@ const countOneAndZero = (binaries: string[]): Count[] => {
 }
 
 const part02 = (binaries: string[]): number => {
-  let counts: Count[] = [];
+  let counts: Count[];
 
   let oxys = [...binaries];
   counts = countOneAndZero(oxys);
