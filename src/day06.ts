@@ -1,10 +1,5 @@
 import { INPUT } from "./day06.input";
 
-interface Fish {
-  daysToSpawn: number,
-  daysLeft: number,
-}
-
 const fishes = INPUT.split(',').map(Number);
 
 const stimulateFish = (fishes: number[], days: number): number => {
