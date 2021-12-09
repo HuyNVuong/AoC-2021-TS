@@ -30,13 +30,14 @@ const sameCharCount = (a: string, b: string): number => {
 
 const sortString = (str: string) => str.split('').sort().join('');
 
-// Deduction
+// Let's do some deduction
 // 0 and 9 has length of 6 contains all character in 7
 // 6 has length of 6 and only have 2 matching character with 7
 // 9 has length of 6 and has all character in 7 and all character in 4
 // all characters of 5 is in 6
 // 2 and 5 share only 3 same character
 // 3 is the remaining
+// All number must be found in order
 const part02 = (entries: Entry[]): number => {
   const total = entries.reduce((sum, {patterns, output}) => {
     const one = sortString(patterns.filter(pattern => pattern.length === 2)[0]);
