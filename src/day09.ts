@@ -57,7 +57,7 @@ const part02 = (locations: Map<string, Location>): number => {
   basinValues.sort((a, b) => b - a);
 
   return basinValues[0] * basinValues[1] * basinValues[2];
-}
+};
 
 console.log(part01(locations));
 console.log(part02(locations));
