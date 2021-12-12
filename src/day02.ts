@@ -1,4 +1,4 @@
-import { INPUT } from "./day02.input";
+import { INPUT } from "./inputs/day02.input";
 
 interface Command {
   command: string,

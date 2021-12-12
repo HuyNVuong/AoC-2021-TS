@@ -1,4 +1,4 @@
-import { INPUT } from "./day10.input";
+import { INPUT } from "./inputs/day10.input";
 
 const lines = INPUT.split('\n').map(line => line.split(''));
 

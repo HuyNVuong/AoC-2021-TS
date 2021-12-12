@@ -1,4 +1,4 @@
-import { INPUT } from "./day03.input";
+import { INPUT } from "./inputs/day03.input";
 
 const binaries = INPUT.split('\n');
 const n = binaries[0].length;

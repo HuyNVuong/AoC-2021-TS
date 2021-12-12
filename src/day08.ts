@@ -1,4 +1,4 @@
-import { INPUT, TEST_DATA } from "./day08.input";
+import { INPUT, TEST_DATA } from "./inputs/day08.input";
 
 interface Entry {
   patterns: string[],

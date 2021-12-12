@@ -1,4 +1,4 @@
-import { INPUT } from "./day09.input";
+import { INPUT } from "./inputs/day09.input";
 
 interface Location {
   x: number,

@@ -1,4 +1,4 @@
-import { INPUT } from "./day06.input";
+import { INPUT } from "./inputs/day06.input";
 
 const fishes = INPUT.split(',').map(Number);
 
