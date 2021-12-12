@@ -28,9 +28,12 @@ const part01 = (graphs: Map<string, string[]>) => {
     }
     for (const neighbor of graphs.get(node)!) {
       if (!seen.has(neighbor)) {
-        const newSeen = new Set([...seen]);
-        if (isLowerCase(neighbor)) newSeen.add(neighbor);
-        queue.push({node: neighbor, seen: newSeen});
+        queue.push({
+          node: neighbor, 
+          seen: isLowerCase(neighbor) 
+            ? new Set([...seen, neighbor])
+            : new Set([...seen]),
+        });
       }    
     }  
   }
