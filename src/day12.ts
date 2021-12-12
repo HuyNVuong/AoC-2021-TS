@@ -12,11 +12,6 @@ const graphs = INPUT.split('\n').reduce((edgeList, line) => {
 
 const isLowerCase = (str: string) => str.toLowerCase() === str;
 
-interface Node {
-  node: string,
-  seen: Set<string>,
-}
-
 const part01 = (graphs: Map<string, string[]>) => {
   const queue = [{node: 'start', seen: new Set(['start'])}];
   let pathsCount = 0;
