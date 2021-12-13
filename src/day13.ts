@@ -22,7 +22,7 @@ const points = coordinates.split('\n').reduce((map, line) => {
 }, new Map<string, Point>());
 
 const folds = foldsRaw.split('\n').map(line => {
-  const [fold, along, raw] = line.split(' ');
+  const [,, raw] = line.split(' ');
   const [direction, position] = raw.split('=');
 
   return {direction, position: Number(position)};
