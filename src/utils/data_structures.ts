@@ -40,15 +40,9 @@ export class PriorityQueue<T> {
     let left = i * 2 + 1;
     while (left <= e) {
       const right = i * 2 + 2 <= e ? i * 2 + 2 : -1;
-      let swapIndex;
-      if (right !== -1 && this.heap[right] < this.heap[left]) {
-        swapIndex = right;
-      } else {
-        swapIndex = left;
-      }
-      // const swapIndex = right !== -1 && 
-      //   this.compare(this.heap[right], this.heap[left]) === -1
-      //     ? right : left;
+      const swapIndex = right !== -1 && 
+        this.compare(this.heap[right], this.heap[left]) === -1
+          ? right : left;
       if (this.compare(this.heap[swapIndex], this.heap[i]) === -1) {
         this.swap(i, swapIndex);
         i = swapIndex;
