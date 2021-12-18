@@ -20,8 +20,7 @@ export class PriorityQueue<T> {
   size = () => this.heap.length;
 
   pop() {
-    this.swap(0, this.heap.length - 1);
-    const element = this.heap.pop();
+    const element = this.heap.shift();
     this.siftDown(0, this.heap.length - 1);
 
     return element;
@@ -45,7 +44,8 @@ export class PriorityQueue<T> {
         this.compare(this.heap[right], this.heap[left]) === -1
           ? right : left;
       if (this.compare(this.heap[swapIndex], this.heap[i]) === -1) {
-        this.swap(swapIndex, i);
+        this.swap(i, swapIndex);
+        i = swapIndex;
         left = i * 2 + 1;
       } else {
         return;

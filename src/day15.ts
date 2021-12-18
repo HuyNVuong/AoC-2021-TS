@@ -1,11 +1,80 @@
 import { INPUT } from "./inputs/day15.input";
-import { PriorityQueue } from "./data_structures/priority_queue";
+import { PriorityQueue } from "./utils/data_structures";
 
-const map = INPUT.split('\n').map(line => line.split('').map(Number));
+const map = `1163751742
+1381373672
+2136511328
+3694931569
+7463417111
+1319128137
+1359912421
+3125421639
+1293138521
+2311944581`.split('\n').map(line => line.split('').map(Number));
 
 interface Node {
   key: string,
   distance: number,
+}
+
+const adjacent = (x: number, y: number) => [
+  [x + 1, y],
+  [x - 1, y],
+  [x, y - 1],
+  [x, y + 1],
+];
+
+const dijkstra = (map: number[][], start: string) => {
+  const graph = new Map<string, Node[]>();
+  const m = map.length;
+  const n = map[0].length;
+  
+  for (let y = 0; y < map.length; y++) {
+    for (let x = 0; x < map[0].length; x++) {
+      const key = `(${x},${y})`;
+      graph.set(key, []);
+      for (const [ax, ay] of adjacent(x, y)) {
+        if (ax >= 0 && ax < n && ay >= 0 && ay < m) {
+          graph.get(key)!.push({
+            key: `(${ax},${ay})`, 
+            distance: map[ay][ax]
+          });
+        }
+      }
+    }
+  }
+
+  const pq = new PriorityQueue<Node>((a, b) => {
+    if (a.distance < b.distance) return -1;
+    if (a.distance > b.distance) return 1;
+    return 0;
+  });
+
+  const seen = new Set([start]);
+  pq.push({key: start, distance: 0});
+  while(pq.any()) {
+    const {key, distance} = pq.pop()!;
+    if (key === `(${n-1},${m-1})`) {
+      return distance;
+    }
+
+    for (const neighbor of graph.get(key)!) {
+     
+      if (!seen.has(neighbor.key)) {
+        pq.push({
+          key: neighbor.key, 
+          distance: distance + neighbor.distance,
+        });
+        seen.add(neighbor.key);
+      }    
+    }
+  }
+
+  return -1;
+};
+
+const part01 = (map: number[][]) => {
+  return dijkstra(map, '(0,0)');
 }
 
 const part02 = (map: number[][]) => {
@@ -30,73 +99,10 @@ const part02 = (map: number[][]) => {
     }
   }
 
-  dijkstra(B, '(0,0)');
- 
+  return dijkstra(B, '(0,0)');
 };
 
-const adjacent = (x: number, y: number) => [
-  [x + 1, y],
-  [x - 1, y],
-  [x, y - 1],
-  [x, y + 1],
-];
-
-const dijkstra = (map: number[][], start: string) => {
-  const graph = new Map<string, Node[]>();
-  const m = map.length;
-  const n = map[0].length;
-  for (let y = 0; y < map.length; y++) {
-    for (let x = 0; x < map[0].length; x++) {
-      const key = `(${x},${y})`;
-      graph.set(key, []);
-      for (const [ax, ay] of adjacent(x, y)) {
-        if (ax >= 0 && ax < n && ay >= 0 && ay < m) {
-          graph.get(key)!.push({
-            key: `(${ax},${ay})`, 
-            distance: map[ay][ax]
-          });
-        }
-      }
-    }
-  }
-
-  const dist = [...graph.keys()].reduce((d, key) => {
-    d[key] = Infinity;
-
-    return d;
-  }, {} as {[key: string]: number});
-
-  dist[start] = 0;
-  const pq = new PriorityQueue<Node>((a: Node, b: Node) => {
-    if (a.distance < b.distance) return -1;
-    if (a.distance > b.distance) return 1;
-    return 0;
-  });
-
-  pq.push({key: start, distance: 0});
-  while(pq.any()) {
-    const {key, distance} = pq.pop()!;
-    if (distance === dist[key]) {
-      for (const neighbor of graph.get(key)!) {
-        if (distance + neighbor.distance < dist[neighbor.key]) {
-          dist[neighbor.key] = distance + neighbor.distance;
-          pq.push({
-            key: neighbor.key, 
-            distance: dist[neighbor.key],
-          });
-        }
-      }
-    }
-  }
-
-  console.log(dist[`(${m-1},${m-1})`]);
-};
-
-const part01 = (map: number[][]) => {
-  dijkstra(map, '(0,0)');
-}
-
-// part01(map);
-part02(map);
+console.log(part01(map));
+console.log(part02(map));
 
 
